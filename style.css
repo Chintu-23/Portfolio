@@ -1,0 +1,866 @@
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f0f2f5; /* Lighter, modern background */
+    color: #333;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f2f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6a0572; /* Darker purple */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4a044e; /* Even darker purple on hover */
+}
+
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%; /* Adjusted padding for better fit */
+    background: linear-gradient(90deg, #1a0033, #6a0572); /* Deeper, more sophisticated gradient */
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3); /* Stronger shadow */
+    transition: all 0.4s ease;
+}
+
+/* Active Navigation State */
+nav ul li a.active {
+    color: #ffcc33; /* Gold color */
+    font-weight: 600; /* Slightly bolder */
+}
+
+nav ul li a.active::after {
+    width: 100%; /* Permanent full underline */
+    background: #ffcc33;
+}
+
+
+nav.scrolled { /* Style for when navbar is scrolled */
+    background: rgba(26, 0, 51, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+nav .logo {
+    font-size: 28px; /* Larger logo */
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: -webkit-linear-gradient(135deg, #ffcc33, #e63946); /* Gold to red gradient for logo */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px; /* Increased gap */
+    transition: transform 0.3s ease-in-out;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 17px;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a::after { /* Underline effect */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background: #ffcc33; /* Gold underline */
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffcc33; /* Gold on hover */
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Mobile Burger Menu */
+.burger {
+    display: none; /* Hidden by default */
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    z-index: 1001;
+}
+
+.burger div {
+    width: 30px;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Burger Animation */
+.burger.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.burger.toggle .line2 {
+    opacity: 0;
+}
+
+.burger.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+
+/* Sections */
+section {
+    padding: 100px 8%; /* More generous padding */
+    text-align: center;
+    overflow: hidden; /* For animations */
+}
+
+h2 {
+    font-size: 44px;
+    margin-bottom: 60px;
+    color: #1a0033; /* Deep purple */
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+h2::after { /* Underline effect for H2 */
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #ffcc33; /* Gold underline */
+    border-radius: 2px;
+}
+
+/* Home Section Layout */
+#home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0033, #6a0572); /* Deeper, rich gradient */
+    padding: 80px 10%;
+    color: #fff; /* White text for contrast */
+}
+
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px; /* Increased gap */
+    max-width: 1300px; /* Wider max-width */
+    width: 100%;
+    flex-wrap: wrap-reverse; /* For better mobile flow */
+}
+
+/* Animation Keyframes */
+@keyframes slideInLeft {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Home Text Part - Base State (Final Visible State) */
+.home-content.slide-in-left {
+    text-align: left;
+    max-width: 600px;
+    transform: translateX(0); /* Final position */
+    opacity: 1; /* Final visibility */
+    transition: all 0.8s ease-out; /* Apply transition here */
+}
+
+/* Home Image Box - Base State (Final Visible State) */
+.home-img.slide-in-right {
+    transform: translateX(0); /* Final position */
+    opacity: 1; /* Final visibility */
+    transition: all 0.8s ease-out; /* Apply transition here */
+}
+
+/* --- Class to Hide/Reset the Element (Starting Animation Point) --- */
+/* This class will be removed by JS to trigger the transition/animation. */
+.home-content.reset-animation {
+    transform: translateX(-100%); /* Start off-screen left */
+    opacity: 0; /* Start invisible */
+}
+
+.home-img.reset-animation {
+    transform: translateX(100%); /* Start off-screen right */
+    opacity: 0; /* Start invisible */
+}
+
+/* Animated Class to Trigger Animation */
+/* We keep the animated class, but it mostly overrides the base state for the initial animation */
+.home-content.animated {
+    animation: slideInLeft 1s forwards ease-out 0.5s;
+}
+
+.home-img.animated {
+    animation: slideInRight 1s forwards ease-out 0.5s;
+}
+/* Animated Class to Trigger Animation */
+.home-content.animated {
+    animation: slideInLeft 1s forwards ease-out 0.5s; /* Run animation */
+}
+
+.home-img.animated {
+    animation: slideInRight 1s forwards ease-out 0.5s; /* Run animation */
+}
+
+.home-content h1 {
+    font-size: 56px; /* Larger heading */
+    font-weight: 700;
+    margin-bottom: 25px;
+    line-height: 1.1;
+    color: #fff;
+}
+
+.home-content .highlight {
+    background: -webkit-linear-gradient(135deg, #ffcc33, #e63946); /* Gold to red gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.5s ease;
+}
+
+.home-content .highlight:hover { /* Subtle hover on highlight */
+    filter: brightness(1.2);
+    transform: scale(1.02);
+}
+
+.home-content p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #e0e0e0; /* Lighter text for contrast */
+    max-width: 550px;
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    padding: 15px 35px; /* Larger button */
+    background: linear-gradient(45deg, #e63946, #ff7f00); /* Red to Orange gradient */
+    color: #fff;
+    border-radius: 8px; /* Slightly more rounded */
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before { /* Hover glow effect */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+    transform: skewX(-30deg);
+    transition: all 0.4s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.home-img .img-box {
+    background: #fff;
+    padding: 20px; /* More padding */
+    border-radius: 12px; /* More rounded */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+    max-width: 350px; /* Slightly larger image container */
+    overflow: hidden;
+    position: relative;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+}
+
+.home-img .img-box::before { /* Subtle background pattern */
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+    z-index: 1;
+    animation: rotateBg 15s linear infinite;
+}
+
+@keyframes rotateBg {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.home-img .img-box:hover {
+    transform: translateY(-10px) scale(1.03);
+}
+
+.home-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Consistent rounding */
+    display: block;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    filter: grayscale(20%);
+    transition: filter 0.5s ease;
+}
+
+.home-img .img-box:hover img {
+    filter: grayscale(0%);
+}
+
+
+/* About Section */
+#about {
+    background: #e0e0e0; /* Light grey background */
+}
+
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 70px; /* Increased gap */
+    align-items: center;
+}
+
+/* About Section - Using Scroll Animation Pattern */
+.about-img {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.8s ease-out; /* Initial State */
+}
+
+.about-img.animated {
+    animation: zoomIn 0.8s forwards ease-out;
+}
+
+@keyframes zoomIn {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.about-img img {
+    width: 300px; /* Larger image */
+    height: 300px; /* Maintain aspect ratio */
+    border-radius: 50%;
+    border: 8px solid transparent; /* Thicker border */
+    background: linear-gradient(135deg, #6a0572, #ffcc33) border-box; /* Purple to Gold gradient border */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* Stronger shadow */
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.6s ease;
+    object-fit: cover; /* Ensures image covers circular area */
+    cursor: grab;
+}
+
+.about-img img:hover {
+    transform: scale(1.08) rotate(5deg);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    cursor: grabbing;
+}
+
+.about-text {
+    max-width: 650px;
+    text-align: left;
+    transform: translateX(100%); /* Initial State */
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+.about-text.animated {
+    animation: slideInRight 1s forwards ease-out 0.2s;
+}
+
+.about-text p {
+    font-size: 17px;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+/* Projects */
+.projects-container {
+    display: grid; /* Using Grid for better layout control */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 35px; /* Increased gap */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.project-card {
+    background: #fff;
+    padding: 30px; /* More padding */
+    border-radius: 18px; /* More rounded */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Stronger shadow */
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother transition */
+    border-left: 6px solid transparent; /* Left border for accent */
+    transform: perspective(1000px) rotateY(0deg); /* Initial 3D perspective */
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+}
+
+.project-card::before { /* Gradient overlay effect */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(106, 5, 114, 0.05) 0%, rgba(255, 204, 51, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card:hover {
+    transform: translateY(-15px) scale(1.03) perspective(1000px) rotateY(3deg); /* Lift and slight rotation */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    border-left: 6px solid #ffcc33; /* Gold border on hover */
+}
+
+.project-card h3 {
+    font-size: 24px;
+    color: #1a0033; /* Deep purple */
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.project-card p {
+    font-size: 16px;
+    color: #555;
+    position: relative;
+    z-index: 2;
+}
+
+.project-card a {
+    text-decoration: none;
+    color: #e63946;
+    font-weight: 600;
+    margin-top: 15px;
+    display: inline-block;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.project-card a:hover {
+    color: #ff7f00; /* Orange on hover */
+    transform: translateX(5px);
+}
+
+/* Skills */
+#skills {
+    background: #f8f8fa; /* Very light background */
+}
+
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Grid for flexible layout */
+    gap: 25px; 
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.skill-card {
+    background: #fff;
+    color: #1a0033; /* Deep text color */
+    padding: 25px 15px; /* Adjusted padding */
+    border-radius: 12px; /* Nicely rounded corners */
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border-bottom: 5px solid transparent; /* Subtle bottom accent */
+    transform: perspective(1000px) scale(1); /* Initial state for 3D effect */
+}
+
+.skill-card i {
+    font-size: 48px; /* Large icons */
+    margin-bottom: 10px;
+    background: -webkit-linear-gradient(45deg, #6a0572, #e63946); /* Icon gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.4s ease;
+}
+
+.skill-card p {
+    font-weight: 600;
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Unique Hover Effect: Pop-out and Accent */
+.skill-card:hover {
+    transform: perspective(1000px) scale(1.08) rotateX(5deg); /* Slight 3D rotation and lift */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    border-bottom: 5px solid #ffcc33; /* Gold accent on hover */
+}
+
+.skill-card:hover i {
+    transform: scale(1.1); /* Icon slightly enlarges */
+}
+
+
+/* Responsive Update for Skills Grid */
+@media (max-width: 600px) {
+    .skills-container {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 15px;
+    }
+
+    .skill-card i {
+        font-size: 38px;
+    }
+}
+
+
+/* Contact */
+#contact {
+    background: linear-gradient(135deg, #6a0572, #1a0033); /* Deep purple gradient */
+    color: #fff;
+}
+
+#contact h2 {
+    color: #fff;
+}
+
+#contact h2::after {
+    background: #ffcc33; /* Gold underline */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px; /* Wider form */
+    margin: auto;
+    background: rgba(255,255,255,0.1); /* Semi-transparent background */
+    padding: 40px;
+    border-radius: 20px; /* More rounded */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transform: scale(0.9);
+    opacity: 0;
+    animation: zoomIn 0.8s forwards ease-out 0.5s;
+}
+
+form input, form textarea {
+    padding: 15px 20px; /* More padding */
+    border-radius: 12px; /* More rounded */
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05); /* Transparent input background */
+    color: #fff;
+    resize: vertical; /* Allow vertical resize */
+    font-size: 16px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #ffcc33; /* Gold border on focus */
+    background: rgba(255,255,255,0.1);
+    outline: none;
+}
+
+form::placeholder { /* Placeholder text color */
+    color: #ccc;
+}
+
+
+form button {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 30px; /* More rounded */
+    background: linear-gradient(45deg, #ffcc33, #e63946); /* Gold to Red gradient */
+    color: #1a0033; /* Deep purple text */
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+form button:hover {
+    background: linear-gradient(45deg, #e63946, #ffcc33); /* Reverse gradient on hover */
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+/* Social Icons */
+.social {
+    margin-top: 40px;
+}
+
+.social a {
+    margin: 0 15px; /* More spacing */
+    color: #ffcc33; /* Gold color */
+    font-size: 32px; /* Larger icons */
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    position: relative;
+}
+
+.social a::before { /* Circular background on hover */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+    z-index: 0;
+}
+
+.social a:hover::before {
+    width: 60px;
+    height: 60px;
+}
+
+.social a i {
+    position: relative;
+    z-index: 1;
+}
+
+.social a:hover {
+    color: #e63946; /* Red on hover */
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Footer */
+footer {
+    background: #1a0033; /* Deep purple */
+    color: #e0e0e0; /* Lighter text */
+    padding: 25px; /* More padding */
+    text-align: center;
+    font-size: 15px;
+    box-shadow: inset 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    nav {
+        padding: 15px 3%;
+    }
+
+    nav ul {
+        gap: 20px;
+    }
+
+    .home-container {
+        flex-direction: column-reverse; /* Stack elements for mobile */
+        text-align: center;
+        gap: 50px;
+    }
+
+    /* Important: Must set animated state here for mobile if needed, or disable animation */
+    /* Mobile-specific rule to disable the animation for smaller screens, as intended previously */
+    .home-content, .home-img {
+        /* !important overrides the JS observer and animation classes */
+        transform: none !important;
+        opacity: 1 !important;
+        animation: none !important;
+    }
+
+    .home-content h1 {
+        font-size: 48px;
+    }
+
+    .home-content p {
+        font-size: 17px;
+    }
+
+    .about-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-img img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .about-text {
+        text-align: center;
+        transform: none; /* Disable initial animation for smaller screens */
+        opacity: 1;
+        animation: none;
+    }
+
+    .projects-container {
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
+
+    h2 {
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navbar for mobile */
+    nav ul {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: 60%;
+        background: linear-gradient(135deg, #1a0033, #6a0572);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%); /* Hide menu off-screen */
+        z-index: 999;
+    }
+
+    nav ul.nav-active {
+        transform: translateX(0%); /* Show menu */
+    }
+
+    nav ul li {
+        opacity: 0; /* Initial opacity for animation */
+    }
+
+    .burger {
+        display: flex; /* Show burger menu */
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+
+    h2 {
+        font-size: 36px;
+    }
+
+    section {
+        padding: 80px 5%;
+    }
+
+    form {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav .logo {
+        font-size: 24px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    .home-content p {
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+
+    .social a {
+        font-size: 28px;
+        margin: 0 10px;
+    }
+}
+
+/* --- RESUME DOWNLOAD BUTTON STYLING (ADDED AT LAST) --- */
+
+/* Styling for the Download Resume Button */
+.home-content .download-btn {
+    /* Adjust margin to separate the two buttons slightly */
+    margin-left: 20px;
+    
+    /* Reverse colors for contrast */
+    background: linear-gradient(45deg, #6a0572, #1a0033); /* Purple to Deep Purple */
+    color: #ffcc33; /* Gold text */
+    border: 2px solid #ffcc33; /* Gold border for emphasis */
+}
+
+.home-content .download-btn:hover {
+    background: linear-gradient(45deg, #1a0033, #6a0572); /* Reverse hover gradient */
+    /* Keep other hover effects from .btn */
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 992px) {
+    .home-content .download-btn {
+        margin-top: 15px; /* Add space between buttons on mobile */
+        margin-left: 0;
+        display: block; /* Make it take the full width */
+    }
+}
